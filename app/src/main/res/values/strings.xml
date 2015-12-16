@@ -1,0 +1,16 @@
+<resources>
+    <string name="all_rights_reserverd">All rights reserverd</string>
+    <string name="app_name">AdBlockFast</string>
+    <string name="about">About</string>
+    <string name="contact_us">Contact us  at http://twitter.com/adblockfast.</string>
+    <string name="copyright"><![CDATA[© Rocketship <http://rocketshipapps.com>]]></string>
+    <string name="blocking_ads">Blocking ads</string>
+    <string name="help">Help</string>
+    <string name="ok">Okay</string>
+    <string name="not_blocking_ads">Not blocking ads</string>
+    <string name="slogan">The World\'s Fastest Ad Blocker</string>
+    <string name="status">Status: </string>
+    <string name="tap_block">Tap to block</string>
+    <string name="tap_unblock">Tap to unblock</string>
+    <string name="title">AdBlock Fast</string>
+</resources>
