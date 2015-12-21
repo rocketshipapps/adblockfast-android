@@ -1,4 +1,4 @@
-package com.adblockfast;
+package com.rocketshipapps.adblockfast;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -14,12 +14,10 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.adblockfast.utils.Rule;
+import com.rocketshipapps.adblockfast.utils.Rule;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
-import static com.dtx12.android_animations_actions.actions.Actions.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -140,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.blocked_13,
             R.drawable.blocked_14,
             R.drawable.blocked_15
-        }, R.string.not_blocking_ads, R.string.tap_block);
+        }, R.string.unblocked_status, R.string.unblocked_action);
     }
 
     void enableAnimtaion() {
@@ -161,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.unblocked_13,
             R.drawable.unblocked_14,
             R.drawable.unblocked_15
-        }, R.string.blocking_ads, R.string.tap_unblock);
+        }, R.string.blocked_status, R.string.blocked_action);
     }
 
     void animator(final int[] res, final int resTxtStatus, final int resTxtTap) {

@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title"
+            android:text="@string/name"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textSize="14sp"
@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/slogan"
+            android:text="@string/tagline"
             android:textColor="@android:color/white"
             fontPath="fonts/AvenirNextLTPro-Light.ttf"
             android:layout_marginBottom="3dp"/>
@@ -42,14 +42,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/copyright"
+            android:text="@string/author"
             android:textColor="@android:color/white"
             fontPath="fonts/AvenirNextLTPro-Light.ttf" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/all_rights_reserverd"
+            android:text="@string/copyright"
             android:textColor="@android:color/white"
             fontPath="fonts/AvenirNextLTPro-Light.ttf"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_button"
-                android:text="@string/ok"
+                android:text="@string/dismiss"
                 android:layout_centerInParent="true"
                 android:textColor="@android:color/white" />
         </RelativeLayout>

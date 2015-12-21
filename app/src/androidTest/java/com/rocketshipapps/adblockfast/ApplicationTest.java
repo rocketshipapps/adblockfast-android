@@ -1,4 +1,4 @@
-package com.adblockfast;
+package com.rocketshipapps.adblockfast;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

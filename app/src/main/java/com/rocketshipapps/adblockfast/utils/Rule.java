@@ -1,4 +1,4 @@
-package com.adblockfast.utils;
+package com.rocketshipapps.adblockfast.utils;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,7 +11,7 @@ public class Rule {
 
     public static File get(Context context) {
         boolean active = context.getSharedPreferences(PREFERENCE, 0).getBoolean(TAG, false);
-        Uri uri = Uri.parse("android.resouce://com.adblockfast/raw/" + (active ? "blocked" : "unblocked"));
+        Uri uri = Uri.parse("android.resouce://com.rocketshipapps.adblockfast/raw/" + (active ? "blocked" : "unblocked"));
         return new File(uri.getPath());
     }
 

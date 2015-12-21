@@ -1,4 +1,4 @@
-package com.adblockfast.ui;
+package com.rocketshipapps.adblockfast.ui;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.adblockfast.R;
+import com.rocketshipapps.adblockfast.R;
 
 public class HelpOverlay extends DialogFragment {
 

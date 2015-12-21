@@ -1,4 +1,4 @@
-package com.adblockfast.contentBlocker.contentProvider;
+package com.rocketshipapps.adblockfast.contentBlocker.contentProvider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -9,7 +9,7 @@ import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
 
-import com.adblockfast.utils.Rule;
+import com.rocketshipapps.adblockfast.utils.Rule;
 
 import java.io.FileNotFoundException;
 
