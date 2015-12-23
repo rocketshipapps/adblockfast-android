@@ -2,13 +2,12 @@ package com.rocketshipapps.adblockfast.utils;
 
 import android.content.Context;
 
-import java.io.IOException;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.FileOutputStream;
-
 import com.rocketshipapps.adblockfast.R;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Rule {
     public static String TAG = "rule_status";
@@ -17,25 +16,37 @@ public class Rule {
 
     public static File get(Context context) {
         boolean active = context.getSharedPreferences(PREFERENCE, 0).getBoolean(TAG, false);
-        
-        int res = (active) ? R.raw.blocked: R.raw.unblocked;
-        File file = new File(context.getFilesDir(), OUTPUT);
-        // Remove any old file lying around
-        if (file.exists()) 
-            file.delete();
-            
+
+        InputStream in = null;
+        FileOutputStream out = null;
+        File file = null;
+
         try {
+            int res = (active) ? R.raw.blocked: R.raw.unblocked;
+            file = new File(context.getFilesDir(), OUTPUT);
+
+            // Remove any old file lying around
+            if (file.exists()) file.delete();
+
             file.createNewFile();
-            InputStream in = context.getResources().openRawResource(res);
-            FileOutputStream out = new FileOutputStream(file);
+
+
+            in = context.getResources().openRawResource(res);
+            out = new FileOutputStream(file);
 
             byte[] buffer = new byte[1024];
             int read;
-            while((read = in.read(buffer)) != -1){
+            while ((read = in.read(buffer)) != -1) {
                 out.write(buffer, 0, read);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignore) {} finally {
+            try {
+                if (in != null) in.close();
+            } catch (Exception ignore) {}
+
+            try {
+                if (out != null) out.close();
+            } catch (Exception ignore) {}
         }
 
         return file;
