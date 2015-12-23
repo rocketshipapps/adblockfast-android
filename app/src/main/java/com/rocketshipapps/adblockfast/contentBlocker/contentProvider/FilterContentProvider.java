@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.rocketshipapps.adblockfast.utils.Rule;
 
 import java.io.FileNotFoundException;
+import java.io.File;
+
 
 public class FilterContentProvider extends ContentProvider {
 
@@ -52,6 +55,12 @@ public class FilterContentProvider extends ContentProvider {
     @Override
     public Bundle call(String method, String arg, Bundle extras) {
         return null;
+    }
+
+    @Nullable
+    @Override
+    public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
+        return ParcelFileDescriptor.open(Rule.get(getContext()), ParcelFileDescriptor.MODE_READ_ONLY);
     }
 
     @Nullable

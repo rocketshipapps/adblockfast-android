@@ -2,17 +2,48 @@ package com.rocketshipapps.adblockfast.utils;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
+import java.io.IOException;
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
+
+import com.rocketshipapps.adblockfast.R;
 
 public class Rule {
     public static String TAG = "rule_status";
     public static String PREFERENCE = "adblockfast";
+    private static final String OUTPUT = "rules.txt";
 
     public static File get(Context context) {
         boolean active = context.getSharedPreferences(PREFERENCE, 0).getBoolean(TAG, false);
-        Uri uri = Uri.parse("android.resouce://com.rocketshipapps.adblockfast/raw/" + (active ? "blocked" : "unblocked"));
-        return new File(uri.getPath());
+        
+        int res = (active) ? R.raw.blocked: R.raw.unblocked;
+        File file = new File(context.getFilesDir(), OUTPUT);
+        // Remove any old file lying around
+        if (file.exists()) 
+            file.delete();
+            
+        try {
+            file.createNewFile();
+            InputStream in = context.getResources().openRawResource(res);
+            Log.e(TAG, "Write into file");
+            FileOutputStream out = new FileOutputStream(file);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while((read = in.read(buffer)) != -1){
+                out.write(buffer, 0, read);
+            }
+        } catch (IOException e) {
+
+            Log.e(TAG, "get() Exception : " + e.toString());
+            e.printStackTrace();
+        }
+
+        return file;
     }
 
     public static boolean active(Context context) {
@@ -29,5 +60,8 @@ public class Rule {
 
     public static void enable(Context context) {
         context.getSharedPreferences(PREFERENCE, 0).edit().putBoolean(TAG, true).apply();
+    }
+
+    private void copyFile(boolean active, OutputStream out) throws IOException {
     }
 }
