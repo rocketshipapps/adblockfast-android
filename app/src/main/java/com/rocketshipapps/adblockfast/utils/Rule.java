@@ -1,8 +1,6 @@
 package com.rocketshipapps.adblockfast.utils;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.File;
@@ -29,7 +27,6 @@ public class Rule {
         try {
             file.createNewFile();
             InputStream in = context.getResources().openRawResource(res);
-            Log.e(TAG, "Write into file");
             FileOutputStream out = new FileOutputStream(file);
 
             byte[] buffer = new byte[1024];
@@ -38,8 +35,6 @@ public class Rule {
                 out.write(buffer, 0, read);
             }
         } catch (IOException e) {
-
-            Log.e(TAG, "get() Exception : " + e.toString());
             e.printStackTrace();
         }
 
@@ -60,8 +55,5 @@ public class Rule {
 
     public static void enable(Context context) {
         context.getSharedPreferences(PREFERENCE, 0).edit().putBoolean(TAG, true).apply();
-    }
-
-    private void copyFile(boolean active, OutputStream out) throws IOException {
     }
 }

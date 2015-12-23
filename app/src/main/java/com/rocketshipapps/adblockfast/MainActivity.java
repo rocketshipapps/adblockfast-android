@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.util.Log;
 
 import com.rocketshipapps.adblockfast.utils.Rule;
 
@@ -22,7 +21,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
     boolean animating = false;
 
     ImageButton btnAdblock;
@@ -35,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "DJ onCreate");
         setContentView(R.layout.activity_main);
 
         CalligraphyConfig.initDefault(
