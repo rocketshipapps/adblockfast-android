@@ -15,7 +15,7 @@ public class Rule {
     private static final String OUTPUT = "rules.txt";
 
     public static File get(Context context) {
-        boolean active = context.getSharedPreferences(PREFERENCE, 0).getBoolean(TAG, false);
+        boolean active = context.getSharedPreferences(PREFERENCE, 0).getBoolean(TAG, true);
 
         InputStream in = null;
         FileOutputStream out = null;
