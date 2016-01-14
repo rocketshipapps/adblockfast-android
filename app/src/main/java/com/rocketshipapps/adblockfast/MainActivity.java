@@ -3,18 +3,24 @@ package com.rocketshipapps.adblockfast;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rocketshipapps.adblockfast.utils.Rule;
+
+import java.util.List;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -88,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.alert_dialog_about);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        TextView link = (TextView) dialog.findViewById(R.id.link);
+        link.setText(Html.fromHtml(link.getText().toString()));
+        link.setMovementMethod(LinkMovementMethod.getInstance());
+
         dialog.show();
 
         ((TextView)dialog.findViewById(R.id.txt_version)).setText(version);
@@ -108,12 +119,27 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
+        TextView link = (TextView) dialog.findViewById(R.id.link);
+        link.setText(Html.fromHtml(link.getText().toString()));
+        link.setMovementMethod(LinkMovementMethod.getInstance());
+
         dialog.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
+    }
+
+    public void onSettingsPressed(View v) {
+        Intent intent = new Intent();
+        intent.setAction("com.samsung.android.sbrowser.contentBlocker.ACTION_SETTING");
+        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, 0);
+        if (list.size() > 0) {
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Samsung Browser not found on your system", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //endregion

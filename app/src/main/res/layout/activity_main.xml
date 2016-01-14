@@ -75,6 +75,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/settings"
+        style="@style/Title"
+        android:background="@null"
+        android:onClick="onSettingsPressed"
+        fontPath="fonts/HudsonNY.ttf" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:text="@string/about"
         style="@style/Title"

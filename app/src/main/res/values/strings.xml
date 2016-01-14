@@ -7,9 +7,10 @@
     <string name="unblocked_action">Tap to block</string>
     <string name="help">Help</string>
     <string name="about">About</string>
-    <string name="contact">If you have questions or comments, message us at https://twitter.com/adblockfast.</string>
+    <string name="contact"><![CDATA[If you have questions or comments, message us <a href="https://twitter.com/adblockfast">on Twitter</a>.]]></string>
     <string name="tagline">The World’s Fastest Ad Blocker</string>
-    <string name="author"><![CDATA[© Rocketship <http://rocketshipapps.com/>.]]></string>
+    <string name="author"><![CDATA[<a href="http://rocketshipapps.com/">© Rocketship</a>.]]></string>
     <string name="copyright">All rights reserved.</string>
     <string name="dismiss">Okay</string>
+    <string name="settings">Settings</string>
 </resources>
