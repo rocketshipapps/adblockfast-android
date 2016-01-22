@@ -46,7 +46,7 @@
             android:id="@+id/txt_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/blocked_status"
+            android:text="@string/blocked_message"
             fontPath="fonts/AvenirNextLTPro-Light.ttf"/>
     </LinearLayout>
 
@@ -54,7 +54,7 @@
         android:id="@+id/txt_tap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/blocked_action"
+        android:text="@string/blocked_hint"
         android:layout_below="@id/btn_adblock"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -69,17 +69,6 @@
         style="@style/Title"
         android:background="@null"
         android:onClick="onHelpPressed"
-        fontPath="fonts/HudsonNY.ttf" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/settings"
-        style="@style/Title"
-        android:background="@null"
-        android:onClick="onSettingsPressed"
         fontPath="fonts/HudsonNY.ttf" />
 
     <Button

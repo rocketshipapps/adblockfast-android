@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.rocketshipapps.adblockfast.utils.Rule;
 
@@ -95,9 +94,9 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.alert_dialog_about);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-        TextView link = (TextView) dialog.findViewById(R.id.link);
-        link.setText(Html.fromHtml(link.getText().toString()));
-        link.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView copyright = (TextView) dialog.findViewById(R.id.copyright);
+        copyright.setText(Html.fromHtml(getString(R.string.copyright)));
+        copyright.setMovementMethod(LinkMovementMethod.getInstance());
 
         dialog.show();
 
@@ -119,9 +118,27 @@ public class MainActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        TextView link = (TextView) dialog.findViewById(R.id.link);
-        link.setText(Html.fromHtml(link.getText().toString()));
-        link.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView summary = (TextView) dialog.findViewById(R.id.summary);
+        TextView details = (TextView) dialog.findViewById(R.id.details);
+        final Intent intent = new Intent();
+        intent.setAction("com.samsung.android.sbrowser.contentBlocker.ACTION_SETTING");
+        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, 0);
+        if (list.size() > 0) {
+            summary.setText(R.string.settings_summary);
+            details.setText(Html.fromHtml(getString(R.string.settings_details)));
+            details.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    startActivity(intent);
+                }
+            });
+        } else {
+            summary.setText(R.string.install_summary);
+            details.setText(Html.fromHtml(getString(R.string.install_details)));
+        }
+        details.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView contact = (TextView) dialog.findViewById(R.id.contact);
+        contact.setText(Html.fromHtml(getString(R.string.contact)));
+        contact.setMovementMethod(LinkMovementMethod.getInstance());
 
         dialog.findViewById(R.id.btn_ok).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,17 +146,6 @@ public class MainActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-    }
-
-    public void onSettingsPressed(View v) {
-        Intent intent = new Intent();
-        intent.setAction("com.samsung.android.sbrowser.contentBlocker.ACTION_SETTING");
-        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, 0);
-        if (list.size() > 0) {
-            startActivity(intent);
-        } else {
-            Toast.makeText(this, "Samsung Browser not found on your system", Toast.LENGTH_SHORT).show();
-        }
     }
 
     //endregion
@@ -164,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.blocked_13,
             R.drawable.blocked_14,
             R.drawable.blocked_15
-        }, R.string.unblocked_status, R.string.unblocked_action);
+        }, R.string.unblocked_message, R.string.unblocked_hint);
     }
 
     void enableAnimtaion() {
@@ -185,13 +191,13 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.unblocked_13,
             R.drawable.unblocked_14,
             R.drawable.unblocked_15
-        }, R.string.blocked_status, R.string.blocked_action);
+        }, R.string.blocked_message, R.string.blocked_hint);
     }
 
     void animator(final int[] res, final int resTxtStatus, final int resTxtTap) {
         animating = true;
 
-        int delay = 100;
+        double delay = 62.5;
 
         for (int i=0; i<res.length; ++i) {
             if (i==0) {
@@ -215,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }
-                }, delay * i);
+                }, Math.round(delay * i));
             }
         }
     }
