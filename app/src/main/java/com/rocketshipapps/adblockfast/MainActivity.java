@@ -17,6 +17,11 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.rocketshipapps.adblockfast.service.RegistrationIntentService;
 import com.rocketshipapps.adblockfast.utils.Rule;
 
 import java.util.List;
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     String packageName;
     String version;
+
+    Tracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         } else {
             disableAnimtaion();
         }
+
+        AdblockfastApplication application = (AdblockfastApplication) getApplication();
+        tracker = application.getDefaultTracker();
+
+        if (checkPlayServices()) {
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
     }
 
     @Override
@@ -69,23 +84,55 @@ public class MainActivity extends AppCompatActivity {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        tracker.setScreenName("/");
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
+    }
+
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, 9000)
+                        .show();
+            } else {
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
     //region OnClick
 
     public void onAdBlockPressed(View v) {
         if (animating) return;
 
+        String action;
+
         if (Rule.active(this)) {
             Rule.disable(this);
             disableAnimtaion();
+            action = "Disable";
         } else {
             Rule.enable(this);
             enableAnimtaion();
+            action = "Enable";
         }
 
         Intent intent = new Intent();
         intent.setAction("com.samsung.android.sbrowser.contentBlocker.ACTION_UPDATE");
         intent.setData(Uri.parse("package:" + packageName));
         sendBroadcast(intent);
+
+        tracker.send(new HitBuilders.EventBuilder()
+            .setCategory("Action")
+            .setAction(action)
+            .build());
     }
 
     public void onAboutPressed(View v) {
@@ -106,9 +153,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                tracker.setScreenName("/");
+                tracker.send(new HitBuilders.ScreenViewBuilder().build());
             }
         });
 
+        tracker.setScreenName("/about");
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     public void onHelpPressed(View v) {
@@ -144,8 +195,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                tracker.setScreenName("/");
+                tracker.send(new HitBuilders.ScreenViewBuilder().build());
             }
         });
+
+        tracker.setScreenName("/help");
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
     }
 
     //endregion
