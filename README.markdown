@@ -1,1 +1,1 @@
-[Adblock Fast](http://adblockfast.com/) for Android.
+[Adblock Fast for Android](https://github.com/rocketshipapps/adblockfast).
